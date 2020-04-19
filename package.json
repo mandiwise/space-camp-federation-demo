@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@apollo/federation": "^0.14.1",
+    "@apollo/gateway": "^0.14.1",
     "apollo-server": "^2.12.0",
     "concurrently": "^5.1.0",
     "graphql": "^15.0.0",
@@ -15,6 +17,7 @@
   "scripts": {
     "server": "concurrently -k npm:server:*",
     "server:rest": "json-server -q db.json",
+    "server:astronauts": "nodemon astronauts.js",
     "server:graphql": "nodemon index.js"
   },
   "keywords": [],

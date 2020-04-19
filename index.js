@@ -1,35 +1,15 @@
-const { ApolloServer, gql } = require("apollo-server");
-const fetch = require("node-fetch");
+const { ApolloServer } = require("apollo-server");
+const { ApolloGateway } = require("@apollo/gateway");
 
 const port = 4000;
-const apiUrl = "http://localhost:3000";
 
-const typeDefs = gql`
-  type Astronaut {
-    id: ID!
-    name: String
-  }
-
-  type Query {
-    astronaut(id: ID!): Astronaut
-    astronauts: [Astronaut]
-  }
-`;
-
-const resolvers = {
-  Query: {
-    astronaut(_, { id }) {
-      return fetch(`${apiUrl}/astronauts/${id}`).then(res => res.json());
-    },
-    astronauts() {
-      return fetch(`${apiUrl}/astronauts`).then(res => res.json());
-    }
-  }
-};
+const gateway = new ApolloGateway({
+  serviceList: [{ name: "astronauts", url: "http://localhost:4001" }]
+});
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers
+  gateway,
+  subscriptions: false
 });
 
 server.listen({ port }).then(({ url }) => {
