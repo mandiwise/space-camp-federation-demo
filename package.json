@@ -1,0 +1,23 @@
+{
+  "name": "space-camp-federation-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "apollo-server": "^2.12.0",
+    "concurrently": "^5.1.0",
+    "graphql": "^15.0.0",
+    "json-server": "^0.16.1",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "server": "concurrently -k npm:server:*",
+    "server:rest": "json-server -q db.json",
+    "server:graphql": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
