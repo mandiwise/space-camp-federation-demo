@@ -6,7 +6,7 @@
   "dependencies": {
     "@apollo/federation": "^0.14.1",
     "@apollo/gateway": "^0.14.1",
-    "apollo-server": "^2.12.0",
+    "apollo-server": "^2.14.2",
     "concurrently": "^5.1.0",
     "graphql": "^15.0.0",
     "json-server": "^0.16.1",
