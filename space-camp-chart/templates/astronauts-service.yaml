@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: space-astronauts
+  labels:
+    app: space-astronauts
+spec:
+  selector:
+    app: space-astronauts
+  ports:
+    - protocol: TCP
+      port: 4001
+      targetPort: 4001

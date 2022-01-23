@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: space-rest
+spec:
+  serviceName: "space-rest"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: space-rest
+  template:
+    metadata:
+      name: space-rest
+      labels:
+        app: space-rest
+    spec:
+      containers:
+        - name: space-rest
+          image: "snoopdave/space-rest"
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: ".1"
+              memory: "200Mi"
+          ports:
+            - containerPort: 3000
+          env:
+            - name: EXAMPLE
+              value: "example"

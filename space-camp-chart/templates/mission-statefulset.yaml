@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: space-mission
+spec:
+  serviceName: "space-mission"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: space-mission
+  template:
+    metadata:
+      name: space-mission
+      labels:
+        app: space-mission
+    spec:
+      containers:
+        - name: space-mission
+          image: "snoopdave/space-mission"
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: ".1"
+              memory: "200Mi"
+          ports:
+            - containerPort: 4002
+          env:
+            - name: API_URL
+              value: "https://{{ .Values.ingress.restHost }}"
+
