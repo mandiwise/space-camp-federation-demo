@@ -16,8 +16,9 @@ This GitHub repo is a fork of Mandi Wise's Space Camp Federation Demo.
 
 This fork is different in these ways:
 * Uses Apollo's Studio services for Supergraph Schema Composition, Uplink, etc.
-* Includes script to build and push Docker images to DockerHub
+* Example scripts for schema publish and checks via Apollo Studio & Rover CLI
 * Includes Helm Chart for deploying to Kubernetes
+* Includes script to build and push Docker images to DockerHub
 
 ## Prerequisites for running on Kubernetes
 
