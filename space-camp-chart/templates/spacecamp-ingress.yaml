@@ -1,0 +1,59 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: space-camp
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    ingress.kubernetes.io/preserve-host: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    certmanager.io/acme-challenge-type: http01
+spec:
+  tls:
+    - hosts:
+        - {{ .Values.ingress.restHost }}
+        - {{ .Values.ingress.astronautsHost }}
+        - {{ .Values.ingress.missionHost }}
+        - {{ .Values.ingress.graphqlHost }}
+      secretName: {{ .Values.ingress.tlsSecretName }}
+  rules:
+    - host: {{ .Values.ingress.restHost }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: space-rest
+                port:
+                  number: 3000
+    - host: {{ .Values.ingress.astronautsHost }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: space-astronauts
+                port:
+                  number: 4001
+    - host: {{ .Values.ingress.missionHost }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: space-mission
+                port:
+                  number: 4002
+    - host: {{ .Values.ingress.graphqlHost }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: space-graphql
+                port:
+                  number: 4000

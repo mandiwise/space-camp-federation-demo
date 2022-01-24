@@ -6,7 +6,9 @@
     },
     {
       "id": 2,
-      "name": "William Anders"
+      "name": "William Anders",
+      "age": 21,
+      "favoriteColor": "red"
     },
     {
       "id": 3,

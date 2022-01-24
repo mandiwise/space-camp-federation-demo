@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: space-astronauts
+spec:
+  serviceName: "space-astronauts"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: space-astronauts
+  template:
+    metadata:
+      name: space-astronauts
+      labels:
+        app: space-astronauts
+    spec:
+      containers:
+        - name: space-astronauts
+          image: "snoopdave/space-astronauts"
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: ".1"
+              memory: "200Mi"
+          ports:
+            - containerPort: 4001
+          env:
+            - name: API_URL
+              value: "https://{{ .Values.ingress.restHost }}"
+

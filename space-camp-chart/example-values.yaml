@@ -1,0 +1,17 @@
+
+# These are the values you will need to provide
+
+service:
+  graphql:
+    # API key from Apollo Studio
+    apiKey: "service:example-blahhlah:blahhlahblahhlah"
+    # GraphRef for the Supergraph Schema in Apollo Studio
+    graphRef: "example-blahhlah@current"
+
+ingress:
+  restHost: "spacerest.example.net"
+  astronautsHost: "spaceastronauts.example.net"
+  missionHost: "spacemission.example.net"
+  graphqlHost: "spacegraphql.example.net"
+  # Name of TLS secret in form suitable for use by Nginx Ingress Controller
+  tlsSecretName: "example-tls"
