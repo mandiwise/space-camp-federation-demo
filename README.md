@@ -31,6 +31,6 @@ This fork is different in these ways:
 
 1. Save your TLS Certficate in a Kubernetes secret
 2. Create namespace `space-camp` via `kubectl apply -f space-camp-chart/namespace.json`
-3. Create a file `space-camp-chart/values.yaml` and fill in all values
+3. Create a file `space-camp-chart/values.yaml` and fill in all values, e.g. `example-values.yaml`
 4. `helm install chart space-camp-chart`
 5. Check to see if pods are running `kubectl get pods -n space-camp` 
