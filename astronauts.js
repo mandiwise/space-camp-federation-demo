@@ -3,8 +3,6 @@ const { buildFederatedSchema } = require("@apollo/federation");
 const fetch = require("node-fetch");
 
 const port = 4001;
-//const apiUrl = "http://localhost:3000";
-//const apiUrl = "https://glacial-caverns-69189.herokuapp.com:3000"
 const apiUrl = process.env.API_URL;
 
 const typeDefs = gql`
