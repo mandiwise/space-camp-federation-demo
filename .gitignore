@@ -8,3 +8,8 @@ node_modules
 ehthumbs.db
 *[Tt]humbs.db
 *.Trashes
+values.yaml
+env.sh
+.idea
+package
+.gradle
