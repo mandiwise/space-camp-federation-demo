@@ -14,11 +14,17 @@ npm i && npm run server
 
 This GitHub repo is a fork of Mandi Wise's Space Camp Federation Demo.
 
+Just like the original codebase there are four services:
+* REST service that provides JSON data
+* Astronauts GraphQL subgraph service 
+* Missions GraphQL subgraph service
+* Space-camp Federated GraphQL supergraph service
+
 This fork is different in these ways:
 * Uses Apollo's Studio services for Supergraph Schema Composition, Uplink, etc.
 * Example scripts for schema publish and checks via Apollo Studio & Rover CLI
-* Includes Helm Chart for deploying to Kubernetes
-* Includes script to build and push Docker images to DockerHub
+* Each of the four services is now packaged via Docker
+* Includes Helm Chart for deploying the four services to Kubernetes
 
 ## Prerequisites for running on Kubernetes
 
@@ -32,6 +38,7 @@ This fork is different in these ways:
 
 1. Save your TLS Certficate in a Kubernetes secret
 2. Create namespace `space-camp` via `kubectl apply -f space-camp-chart/namespace.json`
-3. Create a file `space-camp-chart/values.yaml` and fill in all values, e.g. `example-values.yaml`
-4. `helm install chart space-camp-chart`
-5. Check to see if pods are running `kubectl get pods -n space-camp` 
+3. If you're snoopdave and you've made code changes, login to docker and run `./build-docker.sh` to build and push docker images for the four servers.
+4. Create a file `space-camp-chart/values.yaml` and fill in all values, e.g. `example-values.yaml`
+5. `helm install chart space-camp-chart`
+6. Check to see if pods are running `kubectl get pods -n space-camp` 

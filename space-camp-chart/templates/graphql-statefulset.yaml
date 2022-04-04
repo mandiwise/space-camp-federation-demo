@@ -30,4 +30,10 @@ spec:
               value: {{ .Values.service.graphql.apiKey }}
             - name: APOLLO_GRAPH_REF
               value: {{ .Values.service.graphql.graphRef }}
+            - name: APOLLO_SCHEMA_CONFIG_DELIVERY_ENDPOINT
+              value: {{ .Values.service.graphql.uplink }}
+            - name: APOLLO_REGISTRY_URL
+              value: {{ .Values.service.graphql.reportingUrl }}
+            - name: APOLLO_SCHEMA_REPORTING
+              value: {{ .Values.service.graphql.reportingEnabled | quote }}
 

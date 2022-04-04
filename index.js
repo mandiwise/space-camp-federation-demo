@@ -23,10 +23,15 @@ const server = new ApolloServer({
   introspection: true,
   cors: {
     // access-control-allow-origin: https://studio.apollographql.com
-    origin: "https://studio.apollographql.com",
     // access-control-allow-credentials: true
+    origin: "https://studio-staging.apollographql.com",
     credentials: true,
-  }
+  },
+  plugins: [
+    // ApolloServerPluginSchemaReporting({ // only needed for staging
+    //   endpointUrl: "https://schema-reporting.api.staging.c0.gql.zone/api/graphql"
+    // }),
+  ],
 });
 
 server.listen({ port }).then(({ url }) => {

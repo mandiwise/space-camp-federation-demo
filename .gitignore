@@ -7,5 +7,5 @@ node_modules
 ehthumbs.db
 *[Tt]humbs.db
 *.Trashes
-/env.sh
+/env*.sh
 /space-camp-chart/values.yaml
