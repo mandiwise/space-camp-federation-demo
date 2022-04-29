@@ -5,18 +5,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "graphql": "^16.3.0",
-    "apollo-server": "3.6.7",
-    "@apollo/composition": "2.0.0-preview.8",
-    "@apollo/federation": "0.36.0",
-    "@apollo/federation-internals": "2.0.0-preview.8",
-    "@apollo/gateway": "2.0.0-preview.8",
-    "@apollo/query-graphs": "2.0.0-preview.8",
+    "@apollo/gateway": "^0.50.0",
+    "@apollo/subgraph": "^0.4.0",
+    "apollo-gateway": "^0.0.1",
+    "apollo-server": "^3.6.7",
     "concurrently": "^7.0.0",
+    "dotenv": "^16.0.0",
     "global-agent": "^3.0.0",
-    "json-server": "^0.16.1",
+    "graphql": "^15.8.0",
+    "json-server": "^0.17.0",
     "node-fetch": "^2.6.0",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.15"
   },
   "scripts": {
     "check-env": "node -e 'console.log(process.env)'",

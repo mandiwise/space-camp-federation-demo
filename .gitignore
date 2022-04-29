@@ -9,3 +9,8 @@ ehthumbs.db
 *.Trashes
 /env*.sh
 /space-camp-chart/values.yaml
+values.yaml
+env.sh
+.idea
+package
+.gradle
