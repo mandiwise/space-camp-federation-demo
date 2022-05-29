@@ -1,3 +1,5 @@
+This GitHub repo is a fork of Mandi Wise's Space Camp Federation Demo.
+
 # Apollo Space Camp Demo Code
 
 **Installation:**
