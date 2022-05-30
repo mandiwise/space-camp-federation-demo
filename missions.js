@@ -1,60 +1,46 @@
 const { ApolloServer, gql } = require("apollo-server");
 const { buildSubgraphSchema } = require("@apollo/subgraph");
 const fetch = require("node-fetch");
+const {readFileToString} = require("./utils");
 
 const port = 4002;
 const apiUrl = process.env.API_URL;
 
-const typeDefs = gql`
-  type Mission {
-    id: ID!
-    crew: [Astronaut]
-    designation: String!
-    startDate: String
-    endDate: String
-  }
+readFileToString("missions.graphql").then(missionsSchema => {
 
-  extend type Astronaut @key(fields: "id") {
-    id: ID! @external
-    missions: [Mission]
-  }
+  const typeDefs = gql(missionsSchema);
 
-  extend type Query {
-    mission(id: ID!): Mission
-    missions: [Mission]
-  }
-`;
+  const resolvers = {
+    Astronaut: {
+      async missions(astronaut) {
+        const res = await fetch(`${apiUrl}/missions`);
+        const missions = await res.json();
 
-const resolvers = {
-  Astronaut: {
-    async missions(astronaut) {
-      const res = await fetch(`${apiUrl}/missions`);
-      const missions = await res.json();
-
-      return missions.filter(({ crew }) =>
-        crew.includes(parseInt(astronaut.id))
-      );
-    }
-  },
-  Mission: {
-    crew(mission) {
-      return mission.crew.map(id => ({ __typename: "Astronaut", id }));
-    }
-  },
-  Query: {
-    mission(_, { id }) {
-      return fetch(`${apiUrl}/missions/${id}`).then(res => res.json());
+        return missions.filter(({ crew }) =>
+          crew.includes(parseInt(astronaut.id))
+        );
+      }
     },
-    missions() {
-      return fetch(`${apiUrl}/missions`).then(res => res.json());
+    Mission: {
+      crew(mission) {
+        return mission.crew.map(id => ({ __typename: "Astronaut", id }));
+      }
+    },
+    Query: {
+      mission(_, { id }) {
+        return fetch(`${apiUrl}/missions/${id}`).then(res => res.json());
+      },
+      missions() {
+        return fetch(`${apiUrl}/missions`).then(res => res.json());
+      }
     }
-  }
-};
+  };
 
-const server = new ApolloServer({
-  schema: buildSubgraphSchema([{ typeDefs, resolvers, introspection: false }])
-});
+  const server = new ApolloServer({
+    schema: buildSubgraphSchema([{ typeDefs, resolvers, introspection: false }])
+  });
 
-server.listen({ port }).then(({ url }) => {
-  console.log(`Missions service ready at ${url}`);
+  server.listen({ port }).then(({ url }) => {
+    console.log(`Missions service ready at ${url}`);
+  });
 });
