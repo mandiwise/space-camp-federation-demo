@@ -55,10 +55,8 @@ jobs:
 
     - name: Check Mission schema
       run: |
-        rover graph check ${APOLLO_GRAPH_REF} --schema astronauts.graphql
         rover subgraph check ${APOLLO_GRAPH_REF} --name spaceastronauts --schema astronauts.graphql 
 
     - name: Check Mission schema
       run: | 
-        rover graph check ${APOLLO_GRAPH_REF} --schema missions.graphql
         rover subgraph check ${APOLLO_GRAPH_REF} --name spacemission --schema missions.graphql
