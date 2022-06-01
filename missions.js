@@ -6,7 +6,7 @@ const {readFileToString} = require("./utils");
 const port = 4002;
 const apiUrl = process.env.API_URL;
 
-readFileToString("missions.graphql").then(missionsSchema => {
+readFileToString("schemas/missions.graphql").then(missionsSchema => {
 
   const typeDefs = gql(missionsSchema);
 

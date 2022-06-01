@@ -24,13 +24,13 @@ jobs:
     # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsenv
     env:
       APOLLO_KEY: ${{ secrets.ROVER_API_KEY }}
+      APOLLO_REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
       APOLLO_VCS_COMMIT: ${{ github.event.pull_request.head.sha }}
       APOLLO_GRAPH_REF: space-camp@current
       APOLLO_SCHEMA_REPORTING: true
       ASTRONAUTS_URL: https://spaceastronauts.snoopdave.net
       MISSION_URL: https://spacemission.snoopdave.net
       API_URL: https://spacegraphql.snoopdave.net
-      APOLLO_REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
 
     steps:
 

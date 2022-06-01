@@ -6,7 +6,7 @@ const {readFileToString} = require("./utils");
 const port = 4001;
 const apiUrl = process.env.API_URL;
 
-readFileToString("astronauts.graphql").then(astronautsSchema => {
+readFileToString("schemas/astronauts.graphql").then(astronautsSchema => {
 
   const typeDefs = gql(astronautsSchema);
 

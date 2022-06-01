@@ -1,19 +1,8 @@
 const { ApolloServer } = require("apollo-server");
 const { ApolloGateway } = require("@apollo/gateway");
-//const { ApolloGateway } = require("./gateway/package");
-//const { createHash } = require("crypto")
 const { bootstrap: bootstrapGlobalAgent } = require('global-agent');
 
 const port = 4000;
-
-// without Studio, Uplink, etc.
-// const gateway = new ApolloGateway({
-//   serviceList: [
-//     { name: "astronauts", url: "http://localhost:4001" },
-//     { name: "missions", url: "http://localhost:4002" }
-//   ]
-// });
-//let keyHash = createHash('sha512').update(process.env.APOLLO_KEY).digest('hex');
 
 const gateway = new ApolloGateway();
 bootstrapGlobalAgent();
@@ -22,15 +11,13 @@ const server = new ApolloServer({
   gateway,
   introspection: true,
   cors: {
-    // access-control-allow-origin: https://studio.apollographql.com
-    // access-control-allow-credentials: true
-    origin: "https://studio-staging.apollographql.com",
+    origin: process.env.APOLLO_STUDIO_URL,
     credentials: true,
   },
   plugins: [
-    // ApolloServerPluginSchemaReporting({ // only needed for staging
-    //   endpointUrl: "https://schema-reporting.api.staging.c0.gql.zone/api/graphql"
-    // }),
+    ApolloServerPluginSchemaReporting({
+      endpointUrl: process.env.APOLLO_REGISTRY_URL
+    }),
   ],
 });
 
