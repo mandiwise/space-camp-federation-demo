@@ -23,8 +23,7 @@ Just like the original codebase there are four services:
 * Space-camp Federated GraphQL supergraph service
 
 This fork is different in these ways:
-* Uses Apollo's Studio services for Supergraph Schema Composition, Uplink, etc.
-* Example scripts for schema publish and checks via Apollo Studio & Rover CLI
+* Includes Gtihub action that checks and publishes subgraph schemas and composes a supergraph using Apollo Rover
 * Each of the four services is now packaged via Docker
 * Includes Helm Chart for deploying the four services to Kubernetes
 
