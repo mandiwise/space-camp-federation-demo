@@ -16,3 +16,8 @@ extend type Query {
     mission(id: ID!): Mission
     missions: [Mission]
 }
+
+type Bogus {
+    id: ID!
+    name: String
+}

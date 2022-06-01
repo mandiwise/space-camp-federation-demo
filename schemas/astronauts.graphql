@@ -9,3 +9,8 @@ extend type Query {
   astronaut(id: ID!): Astronaut
   astronauts: [Astronaut]
 }
+
+type Bogus {
+  id: ID!
+  name: String!
+}
