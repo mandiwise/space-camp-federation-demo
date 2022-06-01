@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: space-graphql
+  labels:
+    app: space-graphql
+spec:
+  selector:
+    app: space-graphql
+  ports:
+    - protocol: TCP
+      port: 4000
+      targetPort: 4000

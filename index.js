@@ -1,20 +1,26 @@
 const { ApolloServer } = require("apollo-server");
 const { ApolloGateway } = require("@apollo/gateway");
+const { bootstrap: bootstrapGlobalAgent } = require('global-agent');
 
 const port = 4000;
 
-const gateway = new ApolloGateway({
-  serviceList: [
-    { name: "astronauts", url: "http://localhost:4001" },
-    { name: "missions", url: "http://localhost:4002" }
-  ]
-});
+const gateway = new ApolloGateway();
+bootstrapGlobalAgent();
 
 const server = new ApolloServer({
   gateway,
-  subscriptions: false
+  introspection: true,
+  cors: {
+    origin: process.env.APOLLO_STUDIO_URL,
+    credentials: true,
+  },
+  plugins: [
+    ApolloServerPluginSchemaReporting({
+      endpointUrl: process.env.APOLLO_REGISTRY_URL
+    }),
+  ],
 });
 
 server.listen({ port }).then(({ url }) => {
-  console.log(`Server ready at ${url}`);
+  console.log(`🚀 Gateway ready at ${url}`);
 });

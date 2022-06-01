@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: space-mission
+  labels:
+    app: space-mission
+spec:
+  selector:
+    app: space-mission
+  ports:
+    - protocol: TCP
+      port: 4002
+      targetPort: 4002

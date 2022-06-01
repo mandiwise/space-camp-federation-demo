@@ -1,0 +1,23 @@
+
+type Mission {
+    id: ID!
+    crew: [Astronaut]
+    designation: String!
+    startDate: String
+    endDate: String
+}
+
+extend type Astronaut @key(fields: "id") {
+    id: ID! @external
+    missions: [Mission]
+}
+
+extend type Query {
+    mission(id: ID!): Mission
+    missions: [Mission]
+}
+
+type Bogus {
+    id: ID!
+    name: String!
+}

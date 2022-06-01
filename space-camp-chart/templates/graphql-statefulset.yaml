@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: space-graphql
+spec:
+  serviceName: "space-graphql"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: space-graphql
+  template:
+    metadata:
+      name: space-graphql
+      labels:
+        app: space-graphql
+    spec:
+      containers:
+        - name: space-graphql
+          image: "snoopdave/space-graphql"
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: ".1"
+              memory: "200Mi"
+          ports:
+            - containerPort: 4000
+          env:
+            - name: APOLLO_KEY
+              value: {{ .Values.service.graphql.apiKey }}
+            - name: APOLLO_GRAPH_REF
+              value: {{ .Values.service.graphql.graphRef }}
+            - name: APOLLO_SCHEMA_CONFIG_DELIVERY_ENDPOINT
+              value: {{ .Values.service.graphql.uplink }}
+            - name: APOLLO_REGISTRY_URL
+              value: {{ .Values.service.graphql.reportingUrl }}
+            - name: APOLLO_SCHEMA_REPORTING
+              value: {{ .Values.service.graphql.reportingEnabled | quote }}
+

@@ -1,0 +1,16 @@
+
+type Astronaut @key(fields: "id") {
+  id: ID!
+  name: String
+  favoriteColor: String
+}
+
+extend type Query {
+  astronaut(id: ID!): Astronaut
+  astronauts: [Astronaut]
+}
+
+type Bogus {
+  id: ID!
+  name: String!
+}
