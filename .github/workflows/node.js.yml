@@ -67,7 +67,7 @@ jobs:
 
     - name: Publish subgraphs
       run: |
-        rover subgraph publish space-camp@current --schema "./schemas.astronauts.graphql" \ 
+        rover subgraph publish space-camp@current --schema "./schemas/astronauts.graphql" \ 
           --name spaceastronauts --routing-url "https://spaceastronauts.snoopdave.net"
         rover subgraph publish space-camp@current --schema "./schemas/mission.graphql" \ 
           --name spacemission --routing-url "https://spacemission.snoopdave.net"
