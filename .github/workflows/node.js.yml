@@ -59,7 +59,7 @@ jobs:
 
     - name: Check Mission schema
       run: | 
-        rover subgraph check ${APOLLO_GRAPH_REF} --name spacemission --schema schemas/missions.graphql
+        rover subgraph check ${APOLLO_GRAPH_REF} --name spacemission --schema schemas/mission.graphql
 
     - name: Compose supergraph
       run: |
