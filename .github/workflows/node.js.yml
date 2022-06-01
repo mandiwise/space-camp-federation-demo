@@ -61,7 +61,7 @@ jobs:
       run: | 
         rover subgraph check ${APOLLO_GRAPH_REF} --name spacemission --schema schemas/mission.graphql
 
-    - name: Compose supergraph
+    - name: Compose and check supergraph
       run: |
         rover supergraph compose --config ./supergraph.yaml > gateway.graphql
 
