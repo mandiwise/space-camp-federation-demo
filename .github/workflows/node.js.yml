@@ -30,7 +30,7 @@ jobs:
       ASTRONAUTS_URL: https://spaceastronauts.snoopdave.net
       MISSION_URL: https://spacemission.snoopdave.net
       API_URL: https://spacegraphql.snoopdave.net
-      APOLLO_REGISTRY_URL: https://schema-reporting.api.staging.c0.gql.zone/api/graphql
+      APOLLO_REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
 
     steps:
 
