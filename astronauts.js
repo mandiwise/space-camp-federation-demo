@@ -1,12 +1,12 @@
-const { ApolloServer, gql } = require("apollo-server");
-const { buildSubgraphSchema } = require("@apollo/subgraph");
-const fetch = require("node-fetch");
-const {readFileToString} = require("./utils");
+import { ApolloServer, gql } from 'apollo-server';
+import { buildSubgraphSchema } from '@apollo/subgraph';
+import fetch  from 'node-fetch';
+import { readFileToString }  from './utils.js';
 
 const port = 4001;
 const apiUrl = process.env.API_URL;
 
-readFileToString("schemas/astronauts.graphql").then(astronautsSchema => {
+readFileToString('schemas/astronauts.graphql').then(astronautsSchema => {
 
   const typeDefs = gql(astronautsSchema);
 

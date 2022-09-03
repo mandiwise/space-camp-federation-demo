@@ -1,12 +1,12 @@
-const { ApolloServer, gql } = require("apollo-server");
-const { buildSubgraphSchema } = require("@apollo/subgraph");
-const fetch = require("node-fetch");
-const {readFileToString} = require("./utils");
+import { ApolloServer, gql } from 'apollo-server';
+import { buildSubgraphSchema } from '@apollo/subgraph';
+import fetch  from 'node-fetch';
+import { readFileToString }  from './utils.js';
 
 const port = 4002;
 const apiUrl = process.env.API_URL;
 
-readFileToString("schemas/mission.graphql").then(missionsSchema => {
+readFileToString('schemas/mission.graphql').then(missionsSchema => {
 
   const typeDefs = gql(missionsSchema);
 
@@ -23,7 +23,7 @@ readFileToString("schemas/mission.graphql").then(missionsSchema => {
     },
     Mission: {
       crew(mission) {
-        return mission.crew.map(id => ({ __typename: "Astronaut", id }));
+        return mission.crew.map(id => ({ __typename: 'Astronaut', id }));
       }
     },
     Query: {

@@ -8,6 +8,12 @@ service:
     # GraphRef for the Supergraph Schema in Apollo Studio
     graphRef: "example-blahhlah@current"
 
+    # TODO: if these are not specified, defaults should be used
+    studioUrl: "https://studio.apollographql.com"
+    uplink: "https://aws.uplink.api.apollographql.com/"
+    registryUrl: "https://api.apollographql.com/graphql"
+    usageReportingUrl: "https://usage-reporting.apollographql.com/graphql"
+
 ingress:
   restHost: "spacerest.example.net"
   astronautsHost: "spaceastronauts.example.net"

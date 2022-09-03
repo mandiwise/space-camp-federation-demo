@@ -5,9 +5,11 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - '**'
   pull_request:
-    branches: [ main ]
+    branches:
+      - '**'
 
 jobs:
   build:
@@ -27,10 +29,6 @@ jobs:
       APOLLO_REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
       APOLLO_VCS_COMMIT: ${{ github.event.pull_request.head.sha }}
       APOLLO_GRAPH_REF: space-camp@current
-      APOLLO_SCHEMA_REPORTING: true
-      ASTRONAUTS_URL: https://spaceastronauts.snoopdave.net
-      MISSION_URL: https://spacemission.snoopdave.net
-      API_URL: https://spacegraphql.snoopdave.net
 
     steps:
 
@@ -67,8 +65,8 @@ jobs:
 
     - name: Publish subgraphs
       run: |
-        rover subgraph publish space-camp@current --schema "./schemas/astronauts.graphql" \
+        rover subgraph publish ${APOLLO_GRAPH_REF} --schema "./schemas/astronauts.graphql" \
           --name spaceastronauts --routing-url "https://spaceastronauts.snoopdave.net"
-        rover subgraph publish space-camp@current --schema "./schemas/mission.graphql" \
+        rover subgraph publish ${APOLLO_GRAPH_REF} --schema "./schemas/mission.graphql" \
           --name spacemission --routing-url "https://spacemission.snoopdave.net"
 

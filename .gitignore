@@ -9,7 +9,7 @@ ehthumbs.db
 *.Trashes
 /env*.sh
 /space-camp-chart/values.yaml
-values.yaml
+/space-camp-chart/values-prod.yaml
 env.sh
 .idea
 package

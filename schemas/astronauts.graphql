@@ -3,6 +3,7 @@ type Astronaut @key(fields: "id") {
   id: ID!
   name: String
   favoriteColor: String
+  age: Int
 }
 
 extend type Query {

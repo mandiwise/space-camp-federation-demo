@@ -14,6 +14,8 @@ npm i && npm run server
 
 ## Fork notes
 
+This GitHub repo is a fork of Mandi Wise's Space Camp Federation Demo.
+
 Just like the original codebase there are four services:
 * REST service that provides JSON data
 * Astronauts GraphQL subgraph service 
