@@ -1,0 +1,72 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    # https://docs.github.com/en/actions/reference/environments
+    environment: apollo
+
+    # https://docs.github.com/en/actions/reference/encrypted-secrets
+    # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsenv
+    env:
+      APOLLO_KEY: ${{ secrets.ROVER_API_KEY }}
+      APOLLO_REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+      APOLLO_VCS_COMMIT: ${{ github.event.pull_request.head.sha }}
+      APOLLO_GRAPH_REF: space-camp@current
+
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - run: npm ci
+
+    - run: npm run build --if-present
+
+    - name: Install Rover
+      run: |
+        curl -sSL https://rover.apollo.dev/nix/v0.1.0 | sh
+        # Add Rover to the $GITHUB_PATH so it can be used in another step
+        # https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#adding-a-system-path
+        echo "$HOME/.rover/bin" >> $GITHUB_PATH
+
+    - name: Check Astronauts schema
+      run: |
+        rover subgraph check ${APOLLO_GRAPH_REF} --name spaceastronauts --schema schemas/astronauts.graphql 
+
+    - name: Check Mission schema
+      run: | 
+        rover subgraph check ${APOLLO_GRAPH_REF} --name spacemission --schema schemas/mission.graphql
+
+    - name: Compose and check supergraph
+      run: |
+        rover supergraph compose --config ./supergraph.yaml > gateway.graphql
+
+    - name: Publish subgraphs
+      run: |
+        rover subgraph publish ${APOLLO_GRAPH_REF} --schema "./schemas/astronauts.graphql" \
+          --name spaceastronauts --routing-url "https://spaceastronauts.snoopdave.net"
+        rover subgraph publish ${APOLLO_GRAPH_REF} --schema "./schemas/mission.graphql" \
+          --name spacemission --routing-url "https://spacemission.snoopdave.net"
+

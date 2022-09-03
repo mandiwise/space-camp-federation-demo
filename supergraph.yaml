@@ -1,0 +1,10 @@
+
+subgraphs:
+  spaceastronauts:
+    routing_url: https://spaceastronauts.snoopdave.net
+    schema:
+      file: ./schemas/astronauts.graphql
+  spacemission:
+    routing_url: https://spacemission.snoopdave.net
+    schema:
+      file: ./schemas/mission.graphql

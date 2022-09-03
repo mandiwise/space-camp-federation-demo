@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: space-rest
+  labels:
+    app: space-rest
+spec:
+  selector:
+    app: space-rest
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000

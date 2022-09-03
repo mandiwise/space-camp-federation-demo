@@ -1,5 +1,4 @@
 node_modules
-
 .DS_Store
 .DS_Store?
 ._*
@@ -8,3 +7,10 @@ node_modules
 ehthumbs.db
 *[Tt]humbs.db
 *.Trashes
+/env*.sh
+/space-camp-chart/values.yaml
+/space-camp-chart/values-prod.yaml
+env.sh
+.idea
+package
+.gradle

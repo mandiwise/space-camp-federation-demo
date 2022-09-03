@@ -1,42 +1,39 @@
-const { ApolloServer, gql } = require("apollo-server");
-const { buildSubgraphSchema } = require("@apollo/subgraph");
-const fetch = require("node-fetch");
+import { ApolloServer, gql } from 'apollo-server';
+import { buildSubgraphSchema } from '@apollo/subgraph';
+import fetch  from 'node-fetch';
+import { readFileToString }  from './utils.js';
 
 const port = 4001;
-const apiUrl = "http://localhost:3000";
+const apiUrl = process.env.API_URL;
 
-const typeDefs = gql`
-  type Astronaut @key(fields: "id") {
-    id: ID!
-    name: String
-  }
+readFileToString('schemas/astronauts.graphql').then(astronautsSchema => {
 
-  extend type Query {
-    astronaut(id: ID!): Astronaut
-    astronauts: [Astronaut]
-  }
-`;
+  const typeDefs = gql(astronautsSchema);
 
-const resolvers = {
-  Astronaut: {
-    __resolveReference(ref) {
-      return fetch(`${apiUrl}/astronauts/${ref.id}`).then(res => res.json());
-    }
-  },
-  Query: {
-    astronaut(_, { id }) {
-      return fetch(`${apiUrl}/astronauts/${id}`).then(res => res.json());
+  const resolvers = {
+    Astronaut: {
+      __resolveReference(ref) {
+        return fetch(`${apiUrl}/astronauts/${ref.id}`).then(res => res.json());
+      }
     },
-    astronauts() {
-      return fetch(`${apiUrl}/astronauts`).then(res => res.json());
+    Query: {
+      astronaut(_, { id }) {
+        return fetch(`${apiUrl}/astronauts/${id}`).then(res => res.json());
+      },
+      astronauts() {
+        return fetch(`${apiUrl}/astronauts`).then(res => res.json());
+      }
     }
-  }
-};
+  };
 
-const server = new ApolloServer({
-  schema: buildSubgraphSchema([{ typeDefs, resolvers }])
+  const server = new ApolloServer({
+    schema: buildSubgraphSchema([{ typeDefs, resolvers, introspection: false }])
+  });
+
+  server.listen({ port }).then(({ url }) => {
+    console.log(`Astronauts service ready at ${url}`);
+  });
+
 });
 
-server.listen({ port }).then(({ url }) => {
-  console.log(`Astronauts service ready at ${url}`);
-});
+
