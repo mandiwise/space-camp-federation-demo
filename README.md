@@ -1,4 +1,4 @@
-This GitHub repo is a fork of Mandi Wise's Space Camp Federation Demo.
+This GitHub repo is a fork of Mandi Wise's Space Camp Federation Demo that has been modified to use Apollo GraphQL Managed Federation and, optionally to run in Kubernetes via Helm.
 
 # Apollo Space Camp Demo Code
 
@@ -13,8 +13,6 @@ npm i && npm run server
 [Watch the recording of the talk here](https://www.youtube.com/watch?v=zZnHA3yyPJY&t=1987s) 👩‍💻
 
 ## Fork notes
-
-This GitHub repo is a fork of Mandi Wise's Space Camp Federation Demo.
 
 Just like the original codebase there are four services:
 * REST service that provides JSON data
