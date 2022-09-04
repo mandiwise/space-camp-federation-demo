@@ -1,3 +1,4 @@
+# noinspection GraphQLMissingType,GraphQLMemberRedefinition,GraphQLUnresolvedReference,GraphQLDuplicateDirective
 
 type Mission {
     id: ID!
@@ -19,5 +20,5 @@ extend type Query {
 
 type Bogus {
     id: ID!
-    name: String
+    name: String!
 }
