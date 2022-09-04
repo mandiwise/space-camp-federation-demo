@@ -1,3 +1,4 @@
+# noinspection GraphQLMissingType,GraphQLUnresolvedReference
 
 type Astronaut @key(fields: "id") {
   id: ID!
