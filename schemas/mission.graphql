@@ -20,5 +20,5 @@ extend type Query {
 
 type Bogus {
     id: ID!
-    name: String!
+    name: String
 }
